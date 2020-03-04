@@ -1,12 +1,12 @@
 class GraphqlController < ApplicationController
-  def execute
+ def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
       # current_user: current_user,
-      blog: Blog.first
+      blog: Blog.last
     }
     result = NginxTestAppSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
